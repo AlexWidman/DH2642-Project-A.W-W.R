@@ -1,0 +1,31 @@
+.flexParent{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.mainContent{
+    flex: 0.5;
+    margin: 3px;
+}
+
+.searchResult{
+    text-align: center;
+    float: left;
+    width: 200px;
+    margin: 10px;
+}
+
+svg {
+    color: black;
+    fill: currentColor;
+    padding: 5px;
+}
+
+.searchbox {
+    border-radius: 8px;
+}
+
+.hidden{
+    display: none;
+}
