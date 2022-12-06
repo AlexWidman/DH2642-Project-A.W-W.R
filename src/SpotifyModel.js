@@ -1,31 +1,17 @@
-import {searchSongs, getSongDetails} from "../src/spotifySource.js";
+import {searchSpotify, getSongDetails} from "../src/spotifySource.js";
 import resolvePromise from "../src/resolvePromise.js";
 
 class SpotifyModel{
-    constructor(nrGuests=2, songArray=[]){
+    constructor(songArray=[]){
         this.observers = [];
-        this.setNumberOfGuests(nrGuests);
         this.songs= songArray;
         this.firstSong = null;
         this.secondSong = null;
         this.searchResultsPromiseState= {};
         this.searchParams= {};
-        this.currentDishPromiseState= {};
+        this.firstSongPromiseState= {};
+        this.secondSongPromiseState= {};
     }
-
-    /*
-    setNumberOfGuests(nr){
-        const prevNumber = this.numberOfGuests; //to store previous number for observer before numberOfGuests is changed
-        
-        if (nr < 1 || !Number.isInteger(nr)){
-            throw new Error("number of guests not a positive integer");
-        }
-        this.numberOfGuests = nr;
-
-        if (prevNumber !== nr){
-            this.notifyObservers({setGuests: nr})
-        }
-    }*/
 
     addToPlaylist(songToAdd){
         if (!this.songs.some(song => song.id === songToAdd.id)){
@@ -53,7 +39,7 @@ class SpotifyModel{
         if (this.firstSong === id){ return; }
         this.firstSong = id
         this.notifyObservers({songID: id});
-        resolvePromise(getSongDetails(id), this.currentSongPromiseState, notifyACB.bind(this));
+        resolvePromise(getSongDetails(id), this.firstSongPromiseState, notifyACB.bind(this));
     }
 
     setSecondSong(id){
@@ -62,7 +48,7 @@ class SpotifyModel{
         if (this.secondSong === id){ return; }
         this.secondSong = id
         this.notifyObservers({songID: id});
-        resolvePromise(getSongDetails(id), this.currentSongPromiseState, notifyACB.bind(this));
+        resolvePromise(getSongDetails(id), this.secondSongPromiseState, notifyACB.bind(this));
     }
 
     setSearchQuery(q){
@@ -75,7 +61,7 @@ class SpotifyModel{
 
     doSearch(queryAndType){
         function notifyACB(){ this.notifyObservers(); }
-        resolvePromise(searchDishes(queryAndType), this.searchResultsPromiseState, notifyACB.bind(this));
+        resolvePromise(searchSpotify(queryAndType), this.searchResultsPromiseState, notifyACB.bind(this));
     }
 
     addObserver(callback){
