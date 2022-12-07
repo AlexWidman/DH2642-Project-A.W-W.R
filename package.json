@@ -1,0 +1,19 @@
+{
+  "name": "dh2642-project-a.w-w.r",
+  "version": "1.0.0",
+  "description": "An application for fetching data from a Spotify API, see README for details.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexWidman/DH2642-Project-A.W-W.R.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexWidman/DH2642-Project-A.W-W.R/issues"
+  },
+  "homepage": "https://github.com/AlexWidman/DH2642-Project-A.W-W.R#readme"
+}
